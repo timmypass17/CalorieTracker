@@ -28,7 +28,7 @@ class HomeFragment : Fragment() {
         binding.btnBanana.setOnClickListener { goToSearchFragment() }
     }
 
-    fun goToSearchFragment() {
+    private fun goToSearchFragment() {
         val action =
             HomeFragmentDirections.actionHomeFragmentToSearchFragment()
         findNavController().navigate(action)

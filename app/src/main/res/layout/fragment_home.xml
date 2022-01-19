@@ -23,7 +23,7 @@
             android:id="@+id/btnBanana"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Get Banana"
+            android:text="Go to search"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

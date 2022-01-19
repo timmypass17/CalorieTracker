@@ -6,6 +6,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Headers
 import retrofit2.http.Query
 
 private const val BASE_URL =
@@ -21,6 +22,7 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface BananaApiService {
+    @Headers("Ocp-Apim-Subscription-Key: 1865e23300f248ac87cd86d6e0550e98")
     @GET("foods")
     suspend fun getListOf(@Query("query") food: String): BananaResponse
 }
