@@ -1,6 +1,7 @@
 package com.example.calorietracker.data
 
 data class BananaResponse(
+
     val items: List<Banana>
 )
 
