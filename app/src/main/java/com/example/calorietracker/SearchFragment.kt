@@ -58,8 +58,11 @@ class SearchFragment : Fragment() {
                 Log.i("SearchFragment", "Typing")
                 return false
             }
-
         })
+
+        // searchview stuff
+        binding.svFood.setQuery(viewModel.currFood.value, false)    // prepopulate searchview text
+        binding.svFood.requestFocus()   // set focus to search view immediately
     }
 
     private fun showChooseFoodUnitDialog() {

@@ -1,15 +1,31 @@
 package com.example.calorietracker.binding
 
 import android.view.View
+import android.widget.ImageView
 import android.widget.ProgressBar
+import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import com.example.calorietracker.R
 import com.example.calorietracker.adapter.BananaSearchListAdapter
-import com.example.calorietracker.data.Banana
+import com.example.calorietracker.data.Food
 import com.example.calorietracker.viewmodels.BananaApiStatus
 
+@BindingAdapter("imageUrl")
+fun bindImage(imgView: ImageView, imgUrl: String?) {
+    imgUrl?.let {
+        val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
+        imgView.load(imgUri) {
+            placeholder(R.drawable.ic_food_default)
+            error(R.drawable.ic_food_default)
+//            error(R.drawable.ic_no_wifi)
+        }
+    }
+}
+
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<Banana>?) {
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<Food>?) {
     val adapter = recyclerView.adapter as BananaSearchListAdapter
     adapter.submitList(data)
 }

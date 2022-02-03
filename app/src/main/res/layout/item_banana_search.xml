@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="food"
-            type="com.example.calorietracker.data.Banana" />
+            type="com.example.calorietracker.data.Food" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,13 +15,23 @@
         android:layout_height="wrap_content"
         android:padding="8dp">
 
+        <ImageView
+            android:id="@+id/ivFoodThumb"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:imageUrl="@{food.photo.thumb}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
         <TextView
             android:id="@+id/tvDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{food.description}"
+            android:layout_marginStart="8dp"
+            android:text="@{food.food_name}"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivFoodThumb"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="banana, fresh, sliced" />
 
@@ -28,9 +39,18 @@
             android:id="@+id/tvQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{@string/unit_quantity(food.serving_qty, food.serving_unit)}"
             app:layout_constraintStart_toStartOf="@+id/tvDescription"
             app:layout_constraintTop_toBottomOf="@+id/tvDescription"
-            android:text="@{@string/unit_quantity(food.quantity, food.unit)}"
-            tools:text="1 Each"/>
+            tools:text="1 Each" />
+
+        <TextView
+            android:id="@+id/tvFoodId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/food_id(food.tag_id)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="#15123" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
