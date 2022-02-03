@@ -17,6 +17,10 @@ class BananaSearchListAdapter(private val onItemClicked: (Banana) -> Unit) :
 
     override fun onBindViewHolder(holder: BananaSearchViewHolder, position: Int) {
         val food = getItem(position)
+        holder.itemView.setOnClickListener {
+            onItemClicked(food)
+        }
+
         holder.bind(food)
     }
 

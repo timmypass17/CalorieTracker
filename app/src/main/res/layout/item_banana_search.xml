@@ -19,8 +19,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{food.description}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="banana, fresh, sliced" />
+
+        <TextView
+            android:id="@+id/tvQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/tvDescription"
+            app:layout_constraintTop_toBottomOf="@+id/tvDescription"
+            android:text="@{@string/unit_quantity(food.quantity, food.unit)}"
+            tools:text="1 Each"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

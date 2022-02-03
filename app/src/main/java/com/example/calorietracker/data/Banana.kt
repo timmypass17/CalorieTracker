@@ -1,7 +1,6 @@
 package com.example.calorietracker.data
 
 data class BananaResponse(
-
     val items: List<Banana>
 )
 
@@ -9,6 +8,6 @@ data class BananaResponse(
 data class Banana(
     val id: String,
     val description: String,
-    val quantity: Float,
-    val unit: String
+    val quantity: String,
+    var unit: String
 )
