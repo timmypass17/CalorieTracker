@@ -18,5 +18,9 @@
         android:id="@+id/searchFragment"
         android:name="com.example.calorietracker.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <argument
+            android:name="food_category"
+            app:argType="string" />
+    </fragment>
 </navigation>

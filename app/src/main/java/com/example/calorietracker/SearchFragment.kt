@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.navArgs
 import com.example.calorietracker.adapter.BananaSearchListAdapter
 import com.example.calorietracker.data.Food
 import com.example.calorietracker.data.FoodApplication
@@ -40,6 +41,8 @@ class SearchFragment : Fragment() {
 
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
+
+    private val navigationArgs: SearchFragmentArgs by navArgs()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -126,12 +129,16 @@ class SearchFragment : Fragment() {
                 return@showAlertDialog  // Invalid input
             }
 
+            val foodCategory = navigationArgs.foodCategory  // get food category from navigation
+
             val foodItem = FoodItem(
                 food_name = food.food_name,
-                serving_qty = food.serving_qty,
+                serving_qty = etQuantity.text.toString(),
                 serving_unit = food.serving_unit,
                 calories = (etQuantity.text.toString().toFloat() * getCalories(food).toInt()).toInt().toString(),
-                photo = food.photo.thumb
+                photo = food.photo.thumb,
+                category = foodCategory,
+                consumed = true // user adds banana for first time, banana is "consumed"
             )
             addFood(foodItem)
         }

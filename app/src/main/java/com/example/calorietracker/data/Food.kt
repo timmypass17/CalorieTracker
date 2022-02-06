@@ -31,9 +31,11 @@ data class Photo(
 @Entity(tableName = "foods")
 data class FoodItem(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,   // init to 0 so we dont have to pass id parameter
-    @ColumnInfo(name = "name") val food_name: String?,
-    @ColumnInfo(name = "qty") val serving_qty: String?,
-    @ColumnInfo(name = "unit") val serving_unit: String?,
-    @ColumnInfo(name = "calories") val calories: String?,
-    @ColumnInfo(name = "photos") val photo: String?,
+    @ColumnInfo(name = "name") val food_name: String = "",
+    @ColumnInfo(name = "qty") val serving_qty: String = "",
+    @ColumnInfo(name = "unit") val serving_unit: String = "",
+    @ColumnInfo(name = "calories") val calories: String = "",
+    @ColumnInfo(name = "photos") val photo: String = "",
+    @ColumnInfo(name = "category") val category: String = "",
+    @ColumnInfo(name = "consumed") val consumed: Boolean = true
 )

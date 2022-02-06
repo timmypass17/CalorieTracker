@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="breakFastViewModel"
+            name="viewModel"
             type="com.example.calorietracker.viewmodels.FoodListViewModel" />
     </data>
 
@@ -46,17 +46,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:overScrollMode="never"
-                app:breakfastListData="@{breakFastViewModel.foodItems}"
+                app:breakfastListData="@{viewModel.breakfastItems}"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/header_breakfast"
                 tools:itemCount="3"
-                tools:listitem="@layout/item_banana_search" />
+                tools:listitem="@layout/item_food" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnBanana"
+                android:id="@+id/btnAddBreakfast"
                 style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3100"
+                android:text="3000"
                 android:textColor="@android:color/holo_orange_dark"
                 app:layout_constraintEnd_toEndOf="@+id/textView2"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
@@ -89,7 +89,7 @@
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1200"
+                android:text="@{viewModel.totalCalories.toString()}"
                 android:textColor="@android:color/holo_green_light"
                 app:layout_constraintEnd_toEndOf="@+id/textView4"
                 app:layout_constraintStart_toStartOf="@+id/textView4"
@@ -102,6 +102,7 @@
                 android:layout_height="172dp"
                 android:layout_marginTop="16dp"
                 android:indeterminateTint="@android:color/holo_green_light"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
@@ -110,7 +111,7 @@
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2000"
+                android:text="0"
                 android:textColor="@android:color/holo_green_light"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toTopOf="@+id/progressBar3"

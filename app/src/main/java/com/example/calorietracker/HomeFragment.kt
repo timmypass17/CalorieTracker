@@ -21,7 +21,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: FoodListViewModel by activityViewModels {
+    private val foodListViewModel: FoodListViewModel by activityViewModels {
         FoodListViewModelFactory(
             (activity?.application as FoodApplication).database.foodDao()
         )
@@ -36,21 +36,23 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = FoodListAdapter { foodItem ->
+        val adapter = FoodListAdapter(foodListViewModel) { foodItem ->
             // food item onclick
+
         }
 
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
-            binding.breakFastViewModel = viewModel
-            binding.rvBreakfast.adapter = adapter
-            btnBanana.setOnClickListener { goToSearchFragment() }
+            binding.viewModel = foodListViewModel
+            rvBreakfast.adapter = adapter
+            btnAddBreakfast.setOnClickListener { goToSearchFragment("breakfast") }
         }
     }
 
-    private fun goToSearchFragment() {
+    private fun goToSearchFragment(category: String) {
         val action =
-            HomeFragmentDirections.actionHomeFragmentToSearchFragment()
+            HomeFragmentDirections.actionHomeFragmentToSearchFragment(
+                foodCategory = category)
         findNavController().navigate(action)
     }
 }
