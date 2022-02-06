@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="food"
-            type="com.example.calorietracker.data.Food" />
+            name="food_item"
+            type="com.example.calorietracker.data.FoodItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +18,7 @@
             android:id="@+id/ivFoodThumb"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            app:imageUrl="@{food.photo.thumb}"
+            app:imageUrl="@{food_item.photo}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="@{food.food_name}"
+            android:text="@{food_item.food_name}"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_constraintStart_toEndOf="@+id/ivFoodThumb"
             app:layout_constraintTop_toTopOf="parent"
@@ -38,20 +38,10 @@
             android:id="@+id/tvQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{@string/unit_quantity(food.serving_qty, food.serving_unit)}"
+            android:text="@{@string/unit_quantity(food_item.serving_qty, food_item.serving_unit)}"
             app:layout_constraintStart_toStartOf="@+id/tvDescription"
             app:layout_constraintTop_toBottomOf="@+id/tvDescription"
             tools:text="1 Each" />
-
-        <TextView
-            android:id="@+id/tvFoodId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="@{@string/food_id(food.tag_id)}"
-            app:layout_constraintStart_toEndOf="@+id/tvDescription"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="#15123" />
 
         <TextView
             android:id="@+id/tvCalorie"

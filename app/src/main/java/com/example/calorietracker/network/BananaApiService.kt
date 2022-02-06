@@ -9,7 +9,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
 
 private const val BASE_URL =
-    "https://trackapi.nutritionix.com"
+    "https://trackapi.nutritionix.com/v2/"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -22,7 +22,7 @@ private val retrofit = Retrofit.Builder()
 
 interface BananaApiService {
     @Headers("x-app-id: f6fd3be2", "x-app-key: e341d992e158a5530d3ea321e34f23ac")
-    @GET("/v2/search/instant")
+    @GET("search/instant")
     suspend fun getListOf(
         @Query("query") foodName: String,
         @Query("detailed") isDetailed: Boolean): FoodResponse

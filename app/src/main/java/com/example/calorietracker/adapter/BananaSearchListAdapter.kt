@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.calorietracker.data.Food
+import com.example.calorietracker.data.Nutrient
 import com.example.calorietracker.databinding.ItemBananaSearchBinding
+import com.example.calorietracker.utility.CALORIE_ID
+import com.example.calorietracker.utility.getCalories
 
 class BananaSearchListAdapter(private val onItemClicked: (Food) -> Unit) :
     ListAdapter<Food, BananaSearchListAdapter.BananaSearchViewHolder>(DiffCallback){
@@ -20,7 +23,6 @@ class BananaSearchListAdapter(private val onItemClicked: (Food) -> Unit) :
         holder.itemView.setOnClickListener {
             onItemClicked(food)
         }
-
         holder.bind(food)
     }
 
@@ -28,9 +30,12 @@ class BananaSearchListAdapter(private val onItemClicked: (Food) -> Unit) :
     class BananaSearchViewHolder(private var binding: ItemBananaSearchBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(food: Food) {
-                binding.food = food
-                binding.executePendingBindings()
-            }
+            binding.food = food
+            binding.executePendingBindings()
+
+            // Add calorie textview
+            binding.tvCalorie.text = getCalories(food)
+        }
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<Food>() {

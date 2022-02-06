@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.calorietracker.R
 import com.example.calorietracker.adapter.BananaSearchListAdapter
+import com.example.calorietracker.adapter.FoodListAdapter
 import com.example.calorietracker.data.Food
+import com.example.calorietracker.data.FoodItem
 import com.example.calorietracker.viewmodels.BananaApiStatus
 
 @BindingAdapter("imageUrl")
@@ -27,6 +29,12 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Food>?) {
     val adapter = recyclerView.adapter as BananaSearchListAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("breakfastListData")
+fun bindBreakfastRecyclerView(recyclerView: RecyclerView, data: List<FoodItem>?) {
+    val adapter = recyclerView.adapter as FoodListAdapter
     adapter.submitList(data)
 }
 

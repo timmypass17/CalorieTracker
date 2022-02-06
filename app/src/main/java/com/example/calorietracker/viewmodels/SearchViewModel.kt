@@ -3,13 +3,14 @@ package com.example.calorietracker.viewmodels
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.calorietracker.data.Food
-import com.example.calorietracker.data.FoodUnit
+import com.example.calorietracker.data.FoodDao
+import com.example.calorietracker.data.FoodItem
 import com.example.calorietracker.network.BananaApi
 import kotlinx.coroutines.launch
 
 enum class BananaApiStatus { LOADING, ERROR, DONE }
 
-class SearchViewModel : ViewModel() {
+class SearchViewModel(private val foodDao: FoodDao) : ViewModel() {
 
     private val _status = MutableLiveData<BananaApiStatus>()
     val status: LiveData<BananaApiStatus> = _status
@@ -21,6 +22,12 @@ class SearchViewModel : ViewModel() {
     val bananas: LiveData<List<Food>> = _bananas
 
     init {
+    }
+
+    fun addFood(food: FoodItem) {
+        viewModelScope.launch {
+            foodDao.insert(food)
+        }
     }
 
     fun getListOf(food: String) {
@@ -44,11 +51,11 @@ class SearchViewModel : ViewModel() {
 /**
  * Creates ViewModel instance
  */
-class SearchViewModelFactory() : ViewModelProvider.Factory {
+class SearchViewModelFactory(private val foodDao: FoodDao) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(SearchViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return SearchViewModel() as T
+            return SearchViewModel(foodDao) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
