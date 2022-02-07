@@ -63,6 +63,8 @@
                 android:layout_height="wrap_content"
                 android:text="Add Food"
                 android:textAlignment="viewStart"
+                android:textColor="@android:color/holo_blue_light"
+                app:iconTint="@android:color/holo_blue_light"
                 app:icon="@drawable/ic_plus"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -97,19 +99,19 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView4"
                 tools:text="1200" />
 
-            <ProgressBar
+            <com.google.android.material.progressindicator.CircularProgressIndicator
                 android:id="@+id/pbCalorieLeft"
-                style="@android:style/Widget.Material.ProgressBar.Large"
-                android:layout_width="172dp"
-                android:layout_height="172dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:indeterminateTint="@android:color/holo_green_light"
                 android:max="3000"
-                android:progress="@{3000 - viewModel.totalCalories}"
-                android:visibility="invisible"
+                android:secondaryProgress="@{viewModel.totalCalories}"
+                app:indicatorColor="@android:color/holo_green_light"
+                app:indicatorSize="172dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                app:trackColor="#E3E9ED" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -244,6 +246,8 @@
                 style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:textColor="@android:color/holo_blue_light"
+                app:iconTint="@android:color/holo_blue_light"
                 android:text="Add Food"
                 android:textAlignment="viewStart"
                 app:icon="@drawable/ic_plus"
