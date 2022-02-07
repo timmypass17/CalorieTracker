@@ -5,4 +5,5 @@
     <string name="unit_quantity">%1$s %2$s</string>
     <string name="food_id">#%1$s</string>
     <string name="calorie_calc">%1$s %2$s x %3$s</string>
+    <string name="macro">%1$sg</string>
 </resources>

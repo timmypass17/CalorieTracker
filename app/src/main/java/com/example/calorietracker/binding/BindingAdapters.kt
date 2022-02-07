@@ -32,8 +32,8 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Food>?) {
     adapter.submitList(data)
 }
 
-@BindingAdapter("breakfastListData")
-fun bindBreakfastRecyclerView(recyclerView: RecyclerView, data: List<FoodItem>?) {
+@BindingAdapter("foodListData")
+fun bindFoodListRecyclerView(recyclerView: RecyclerView, data: List<FoodItem>?) {
     val adapter = recyclerView.adapter as FoodListAdapter
     adapter.submitList(data)
 }

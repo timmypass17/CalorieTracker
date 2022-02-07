@@ -6,7 +6,6 @@ import com.example.calorietracker.data.Food
 import com.example.calorietracker.data.FoodDao
 import com.example.calorietracker.data.FoodItem
 import com.example.calorietracker.network.BananaApi
-import com.example.calorietracker.utility.getUpdatedFoodEntry
 import kotlinx.coroutines.launch
 
 enum class BananaApiStatus { LOADING, ERROR, DONE }
@@ -28,6 +27,12 @@ class SearchViewModel(private val foodDao: FoodDao) : ViewModel() {
     fun addFood(food: FoodItem) {
         viewModelScope.launch {
             foodDao.insert(food)
+        }
+    }
+
+    fun deleteFood(food: FoodItem) {
+        viewModelScope.launch {
+            foodDao.delete(food)
         }
     }
 

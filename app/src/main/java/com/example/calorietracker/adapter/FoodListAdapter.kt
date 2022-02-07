@@ -5,14 +5,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.calorietracker.R
 import com.example.calorietracker.data.Food
+import com.example.calorietracker.data.FoodApplication
 import com.example.calorietracker.data.FoodItem
 import com.example.calorietracker.databinding.ItemFoodBinding
 import com.example.calorietracker.viewmodels.FoodListViewModel
+import com.example.calorietracker.viewmodels.FoodListViewModelFactory
 import kotlinx.android.synthetic.main.item_food.view.*
 
 class FoodListAdapter(private val viewModel: FoodListViewModel, private val onItemclicked: (FoodItem) -> Unit) :
@@ -31,7 +34,7 @@ class FoodListAdapter(private val viewModel: FoodListViewModel, private val onIt
         holder.bind(food_item)
     }
 
-    // inner to access outerclass members
+    // inner to access outer class members
     inner class FoodListViewHolder(private var binding: ItemFoodBinding) :
             RecyclerView.ViewHolder(binding.root) {
         fun bind(food_item: FoodItem) {
@@ -42,19 +45,14 @@ class FoodListAdapter(private val viewModel: FoodListViewModel, private val onIt
             binding.cbCalorie.setOnCheckedChangeListener { compoundButton, b ->
                 if (!b) {
                     // remove
-//                    viewModel.updateConsumed(food_item.id, food_item.food_name, food_item.serving_qty, food_item.serving_unit, food_item.calories, food_item.photo, food_item.category,
-//                        consumed = false)
                     viewModel.updateConsumed(false, food_item.id)
                 } else {
                     // add
-//                    viewModel.updateConsumed(food_item.id, food_item.food_name, food_item.serving_qty, food_item.serving_unit, food_item.calories, food_item.photo, food_item.category,
-//                        consumed = true)
                     viewModel.updateConsumed(true, food_item.id)
                 }
             }
         }
     }
-
 
     companion object DiffCallback : DiffUtil.ItemCallback<FoodItem>() {
 

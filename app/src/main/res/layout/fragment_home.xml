@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
+        android:overScrollMode="never"
         android:padding="16dp"
         tools:context=".HomeFragment">
 
@@ -46,7 +47,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:overScrollMode="never"
-                app:breakfastListData="@{viewModel.breakfastItems}"
+                app:foodListData="@{viewModel.breakfastItems}"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -89,19 +90,22 @@
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{viewModel.totalCalories.toString()}"
+                android:text="@{String.valueOf(viewModel.totalCalories)}"
                 android:textColor="@android:color/holo_green_light"
                 app:layout_constraintEnd_toEndOf="@+id/textView4"
                 app:layout_constraintStart_toStartOf="@+id/textView4"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                app:layout_constraintTop_toBottomOf="@+id/textView4"
+                tools:text="1200" />
 
             <ProgressBar
-                android:id="@+id/progressBar3"
+                android:id="@+id/pbCalorieLeft"
                 style="@android:style/Widget.Material.ProgressBar.Large"
                 android:layout_width="172dp"
                 android:layout_height="172dp"
                 android:layout_marginTop="16dp"
                 android:indeterminateTint="@android:color/holo_green_light"
+                android:max="3000"
+                android:progress="@{3000 - viewModel.totalCalories}"
                 android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -111,14 +115,15 @@
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0"
+                android:text="@{String.valueOf(viewModel.goalCalories - viewModel.totalCalories)}"
                 android:textColor="@android:color/holo_green_light"
                 android:textSize="24sp"
-                app:layout_constraintBottom_toTopOf="@+id/progressBar3"
+                app:layout_constraintBottom_toTopOf="@+id/pbCalorieLeft"
                 app:layout_constraintEnd_toEndOf="@+id/textView7"
                 app:layout_constraintHorizontal_bias="0.477"
                 app:layout_constraintStart_toStartOf="@+id/textView7"
-                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                app:layout_constraintTop_toBottomOf="@+id/textView7"
+                tools:text="1800" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -126,10 +131,10 @@
                 android:layout_height="wrap_content"
                 android:text="KCAL LEFT"
                 app:layout_constraintBottom_toTopOf="@+id/textView6"
-                app:layout_constraintEnd_toEndOf="@+id/progressBar3"
+                app:layout_constraintEnd_toEndOf="@+id/pbCalorieLeft"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="@+id/progressBar3"
-                app:layout_constraintTop_toBottomOf="@+id/progressBar3" />
+                app:layout_constraintStart_toStartOf="@+id/pbCalorieLeft"
+                app:layout_constraintTop_toBottomOf="@+id/pbCalorieLeft" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -141,7 +146,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/textView10"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/progressBar3" />
+                app:layout_constraintTop_toBottomOf="@+id/pbCalorieLeft" />
 
             <TextView
                 android:id="@+id/textView10"
@@ -168,7 +173,8 @@
                 android:id="@+id/textView12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="160g"
+                tools:text="160g"
+                android:text="@{@string/macro(String.valueOf(viewModel.totalProtein))}"
                 app:layout_constraintEnd_toEndOf="@+id/textView9"
                 app:layout_constraintStart_toStartOf="@+id/textView9"
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -197,10 +203,53 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="24dp"
                 android:background="?android:attr/listDivider"
-                app:layout_constraintEnd_toEndOf="@+id/textView11"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/textView9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="377dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="16dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnAddBreakfast" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Lunch"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider2" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvLunch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:foodListData="@{viewModel.lunchItems}"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView8"
+                tools:listitem="@layout/item_food"
+                tools:itemCount="2"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddLunch"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Add Food"
+                android:textAlignment="viewStart"
+                app:icon="@drawable/ic_plus"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvLunch" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

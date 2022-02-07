@@ -5,8 +5,11 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FoodDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(food: FoodItem)
+
+    @Delete
+    suspend fun delete(food: FoodItem)
 
     @Query("SELECT * from foods where category = :category order by id")   // order by add date?
     fun getFoodList(category: String): Flow<List<FoodItem>>
@@ -14,9 +17,16 @@ interface FoodDao {
     @Query("SELECT SUM(calories) from foods WHERE consumed = 1")
     fun getTotalCalories(): Flow<Int>
 
-    @Update
-    suspend fun update(food: FoodItem)
+    @Query("SELECT SUM(protein) from foods WHERE consumed = 1")
+    fun getTotalProtein(): Flow<Int>
 
+    @Query("SELECT SUM(carbs) from foods WHERE consumed = 1")
+    fun getTotalCarbs(): Flow<Int>
+
+    @Query("SELECT SUM(fat) from foods WHERE consumed = 1")
+    fun getTotalFat(): Flow<Int>
+
+    // update consumed
     @Query("UPDATE foods SET consumed = :isConsumed WHERE id = :id")
     suspend fun update(isConsumed: Boolean, id: Int)
 }

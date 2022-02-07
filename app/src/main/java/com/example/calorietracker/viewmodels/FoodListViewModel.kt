@@ -1,9 +1,9 @@
 package com.example.calorietracker.viewmodels
 
 import androidx.lifecycle.*
+import com.example.calorietracker.data.Food
 import com.example.calorietracker.data.FoodDao
 import com.example.calorietracker.data.FoodItem
-import com.example.calorietracker.utility.getUpdatedFoodEntry
 import kotlinx.coroutines.launch
 
 class FoodListViewModel(private val foodDao: FoodDao) : ViewModel() {
@@ -11,19 +11,26 @@ class FoodListViewModel(private val foodDao: FoodDao) : ViewModel() {
     private val _breakfastItems = foodDao.getFoodList("breakfast")
     val breakfastItems: LiveData<List<FoodItem>> = _breakfastItems.asLiveData()
 
+    private val _lunchItems = foodDao.getFoodList("lunch")
+    val lunchItems: LiveData<List<FoodItem>> = _lunchItems.asLiveData()
+
     private val _totalCalories = foodDao.getTotalCalories()
     val totalCalories: LiveData<Int> = _totalCalories.asLiveData()
 
-//    fun updateConsumed(id: Int, name: String, qty: String, unit: String, cal: String, photo: String, category: String, consumed: Boolean) {
-//        viewModelScope.launch {
-//            val newFood = getUpdatedFoodEntry(id, name, qty, unit, cal, photo, category, consumed)
-//            foodDao.update(newFood)
-//        }
-//    }
+    private val _totalProtein = foodDao.getTotalProtein()
+    val totalProtein: LiveData<Int> = _totalProtein.asLiveData()
+
+    val goalCalories = 3100
 
     fun updateConsumed(isConsumed: Boolean, id: Int) {
         viewModelScope.launch {
             foodDao.update(isConsumed, id)
+        }
+    }
+
+    fun deleteFood(food_item: FoodItem) {
+        viewModelScope.launch {
+            foodDao.delete(food_item)
         }
     }
 }
