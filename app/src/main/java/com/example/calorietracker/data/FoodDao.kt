@@ -11,6 +11,10 @@ interface FoodDao {
     @Delete
     suspend fun delete(food: FoodItem)
 
+    // update consumed
+    @Query("UPDATE foods SET consumed = :isConsumed WHERE id = :id")
+    suspend fun update(isConsumed: Boolean, id: Int)
+
     @Query("SELECT * from foods where category = :category order by id")   // order by add date?
     fun getFoodList(category: String): Flow<List<FoodItem>>
 
@@ -21,12 +25,8 @@ interface FoodDao {
     fun getTotalProtein(): Flow<Int>
 
     @Query("SELECT SUM(carbs) from foods WHERE consumed = 1")
-    fun getTotalCarbs(): Flow<Int>
+    fun getTotalCarbsConsumed(): Flow<Int>
 
     @Query("SELECT SUM(fat) from foods WHERE consumed = 1")
-    fun getTotalFat(): Flow<Int>
-
-    // update consumed
-    @Query("UPDATE foods SET consumed = :isConsumed WHERE id = :id")
-    suspend fun update(isConsumed: Boolean, id: Int)
+    fun getTotalFatConsumed(): Flow<Int>
 }

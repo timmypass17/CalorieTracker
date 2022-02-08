@@ -1,25 +1,19 @@
 package com.example.calorietracker.utility
 
+import com.example.calorietracker.R
 import com.example.calorietracker.data.Food
 import com.example.calorietracker.data.FoodItem
 import com.example.calorietracker.data.Nutrient
 
-const val CALORIE_ID = "208"
-const val PROTEIN_ID = "203"
+const val CALORIE_ID = 208
+const val PROTEIN_ID = 203
+const val CARBS_ID = 205
+const val FAT_ID = 204
 
-/** Returns calorie [String] value **/
-fun getCalories(food: Food): String {
+/** Returns nutrient [String] value **/
+fun getNutrient(food: Food, query: Int): String {
     for (nutrient: Nutrient in food.full_nutrients) {
-        if (nutrient.attr_id == CALORIE_ID) {
-            return nutrient.value.toFloat().toInt().toString()    // round down
-        }
-    }
-    return "0"
-}
-
-fun getProtein(food: Food): String {
-    for (nutrient: Nutrient in food.full_nutrients) {
-        if (nutrient.attr_id == PROTEIN_ID) {
+        if (nutrient.attr_id == query.toString()) {
             return nutrient.value.toFloat().toInt().toString()    // round down
         }
     }
@@ -31,9 +25,11 @@ fun convertToFoodItem(food: Food, category: String): FoodItem {
         food_name = food.food_name,
         serving_qty = food.serving_qty,
         serving_unit = food.serving_unit,
-        calories = getCalories(food),
+        calories = getNutrient(food, CALORIE_ID),
         photo = food.photo.thumb,
         category = category,
-        protein = getProtein(food)
+        protein = getNutrient(food, PROTEIN_ID),
+        carbs = getNutrient(food, CARBS_ID),
+        fat = getNutrient(food, FAT_ID)
     )
 }

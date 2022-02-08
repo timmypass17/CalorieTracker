@@ -69,7 +69,9 @@ class FoodDetailFragment : Fragment() {
                     calories = (etQuantity.text.toString().toFloat() * (currentFood.calories.toInt().div(currentFood.serving_qty.toInt()))).toInt().toString(),
                     photo = currentFood.photo,
                     category = currentFood.category,
-                    protein = (etQuantity.text.toString().toFloat() * (currentFood.protein.toInt().div(currentFood.serving_qty.toInt()))).toInt().toString()
+                    protein = (etQuantity.text.toString().toFloat() * (currentFood.protein.toInt().div(currentFood.serving_qty.toInt()))).toInt().toString(),
+                    carbs = (etQuantity.text.toString().toFloat() * (currentFood.carbs.toInt().div(currentFood.serving_qty.toInt()))).toInt().toString(),
+                    fat = (etQuantity.text.toString().toFloat() * (currentFood.fat.toInt().div(currentFood.serving_qty.toInt()))).toInt().toString()
                 )
                 // Add food to room database
                 addFood(newFoodEntry)
@@ -132,12 +134,6 @@ class FoodDetailFragment : Fragment() {
             .setCancelable(false)
             .setNegativeButton("No") { _, _ -> }
             .setPositiveButton("Yes") { _, _ ->
-//                Snackbar.make(requireView(), "Deleted \"${password.websiteName}\" entry", Snackbar.LENGTH_LONG)
-//                    .setActionTextColor(resources.getColor(R.color.grey_light))
-//                    .setAction("Dismiss") {
-//                        // Responds to click on the action
-//                    }
-//                    .show()
                 deleteFood(currentFood)
             }
             .show()
