@@ -51,6 +51,8 @@ class FoodDetailFragment : Fragment() {
 
         _currentFood = navigationArgs.foodItem
 
+        val cal_per_unit = (currentFood.calories.toInt().div(currentFood.serving_qty.toInt()))
+
         binding.apply {
             val imgUri = currentFood.photo.toUri().buildUpon().scheme("https").build()
             ivFoodThumb.load(imgUri) {
@@ -58,7 +60,7 @@ class FoodDetailFragment : Fragment() {
                 error(R.drawable.ic_food_default)
             }
             tvCalorie.text = currentFood.calories
-            tvCalculator.text = this@FoodDetailFragment.getString(R.string.calorie_calc, currentFood.serving_qty, currentFood.serving_unit, currentFood.calories)
+            tvCalculator.text = this@FoodDetailFragment.getString(R.string.calorie_calc, currentFood.serving_qty, currentFood.serving_unit, cal_per_unit.toString())
             btnAddBreakfast.setOnClickListener {
                 // Create new food entry
                 val newFoodEntry = FoodItem(
@@ -92,7 +94,7 @@ class FoodDetailFragment : Fragment() {
                     }
                 }
                 // TODO: User might put super high number, crashes
-                binding.tvCalculator.text = this@FoodDetailFragment.getString(R.string.calorie_calc, quantity, currentFood.serving_unit, currentFood.calories)
+                binding.tvCalculator.text = this@FoodDetailFragment.getString(R.string.calorie_calc, quantity, currentFood.serving_unit, cal_per_unit.toString())
                 binding.tvCalorie.text = (quantity.toFloat() * (currentFood.calories.toInt().div(currentFood.serving_qty.toInt()))).toInt().toString()
             }
 
