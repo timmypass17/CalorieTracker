@@ -41,7 +41,6 @@ class FoodListAdapter(private val viewModel: FoodListViewModel, private val onIt
             binding.foodItem = food_item
             binding.executePendingBindings()
 
-            binding.cbCalorie.text = food_item.calories
             binding.cbCalorie.setOnCheckedChangeListener { compoundButton, b ->
                 if (!b) {
                     // remove

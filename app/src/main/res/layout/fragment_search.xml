@@ -41,11 +41,11 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
-            android:text=""
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/svFood"
-            tools:text="Searching for: banana" />
+            tools:text="Searching for: bananas (23)"
+            android:text="@{`Searching for: ` + viewModel.currFood + ` (` + viewModel.bananas.size() + `)`}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvBananas"
@@ -58,7 +58,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvResult"
             app:listData="@{viewModel.bananas}"
-            tools:listitem="@layout/item_banana_search"/>
+            tools:listitem="@layout/item_banana_search">
+
+        </androidx.recyclerview.widget.RecyclerView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

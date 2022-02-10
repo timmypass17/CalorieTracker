@@ -26,7 +26,14 @@ class FoodListViewModel(private val foodDao: FoodDao) : ViewModel() {
     private val _totalFatsConsumed = foodDao.getTotalFatConsumed()
     val totalFatsConsumed: LiveData<Int> = _totalFatsConsumed.asLiveData()
 
-//    val goalCalories = 3100
+    private val _totalBreakfastProtein = foodDao.getTotalProteinFromCategory("breakfast")
+    val totalBreakfastProtein: LiveData<Int> = _totalBreakfastProtein.asLiveData()
+
+    private val _totalBreakfastCarbs = foodDao.getTotalCarbsFromCategory("breakfast")
+    val totalBreakfastCarbs: LiveData<Int> = _totalBreakfastCarbs.asLiveData()
+
+    private val _totalBreakfastFat = foodDao.getTotalFatFromCategory("breakfast")
+    val totalBreakfastFat: LiveData<Int> = _totalBreakfastFat.asLiveData()
 
     fun updateConsumed(isConsumed: Boolean, id: Int) {
         viewModelScope.launch {

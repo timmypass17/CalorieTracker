@@ -40,7 +40,7 @@ data class FoodItem(
     @ColumnInfo(name = "calories") val calories: String = "",
     @ColumnInfo(name = "photos") val photo: String = "",
     @ColumnInfo(name = "category") val category: String = "",
-    @ColumnInfo(name = "consumed") val consumed: Boolean = true,
+    @ColumnInfo(name = "consumed") val consumed: Boolean = true,    // init to true
     @ColumnInfo(name = "protein") val protein: String = "",
     @ColumnInfo(name = "carbs") val carbs: String = "",
     @ColumnInfo(name = "fat") val fat: String = ""

@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="8dp">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.calorietracker.viewmodels.FoodListViewModel" />
+
         <variable
             name="calorieGoal"
             type="Integer" />
+
         <variable
             name="proteinGoal"
             type="Integer" />
+
         <variable
             name="carbsGoal"
             type="Integer" />
+
         <variable
             name="fatGoal"
             type="Integer" />
@@ -57,6 +63,7 @@
                 android:id="@+id/rvBreakfast"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:overScrollMode="never"
                 app:foodListData="@{viewModel.breakfastItems}"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
@@ -185,29 +192,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="2dp"
-                tools:text="120g"
                 android:text="@{@string/macro(String.valueOf(viewModel.totalCarbsConsumed))}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 app:layout_constraintBottom_toBottomOf="@+id/tvCarbTotal"
-                app:layout_constraintEnd_toStartOf="@+id/tvCarbTotal" />
+                app:layout_constraintEnd_toStartOf="@+id/tvCarbTotal"
+                tools:text="120g" />
 
             <TextView
                 android:id="@+id/textView14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="2dp"
-                tools:text="81g"
                 android:text="@{@string/macro(String.valueOf(viewModel.totalFatsConsumed))}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 app:layout_constraintBottom_toBottomOf="@+id/textView17"
-                app:layout_constraintEnd_toStartOf="@+id/textView17" />
+                app:layout_constraintEnd_toStartOf="@+id/textView17"
+                tools:text="81g" />
 
             <View
                 android:id="@+id/divider3"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:background="?android:attr/listDivider"
                 android:layout_marginTop="16dp"
+                android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -237,6 +244,7 @@
                 android:id="@+id/rvLunch"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 app:foodListData="@{viewModel.lunchItems}"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -285,31 +293,31 @@
                 android:id="@+id/textView15"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="/160g"
                 android:text="@{'/' + String.valueOf(proteinGoal) + 'g'}"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/progressBar2"
-                app:layout_constraintEnd_toEndOf="@+id/progressBar2" />
+                app:layout_constraintEnd_toEndOf="@+id/progressBar2"
+                tools:text="/160g" />
 
             <TextView
                 android:id="@+id/tvCarbTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="/160g"
                 android:text="@{'/' + String.valueOf(carbsGoal) + 'g'}"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/progressBar3"
-                app:layout_constraintEnd_toEndOf="@+id/progressBar3" />
+                app:layout_constraintEnd_toEndOf="@+id/progressBar3"
+                tools:text="/160g" />
 
             <TextView
                 android:id="@+id/textView17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="/160g"
                 android:text="@{'/' + String.valueOf(fatGoal) + 'g'}"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/pbFat"
-                app:layout_constraintEnd_toEndOf="@+id/pbFat" />
+                app:layout_constraintEnd_toEndOf="@+id/pbFat"
+                tools:text="/160g" />
 
             <ProgressBar
                 android:id="@+id/progressBar2"
@@ -349,6 +357,39 @@
                 app:layout_constraintEnd_toEndOf="@+id/progressBar2"
                 app:layout_constraintStart_toStartOf="@+id/textView11"
                 app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="40g protein"
+                android:text="@{@string/units_macro(viewModel.totalBreakfastProtein, `protein`)}"
+                app:layout_constraintEnd_toStartOf="@+id/textView19"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/header_breakfast"
+                app:layout_constraintTop_toTopOf="@+id/header_breakfast" />
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="80g carbs"
+                android:text="@{@string/units_macro(viewModel.totalBreakfastCarbs, `carbs`)}"
+                app:layout_constraintEnd_toStartOf="@+id/textView20"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/textView3"
+                app:layout_constraintTop_toTopOf="@+id/header_breakfast" />
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="60g fat"
+                android:text="@{@string/units_macro(viewModel.totalBreakfastFat, `fat`)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/textView19"
+                app:layout_constraintTop_toTopOf="@+id/header_breakfast" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

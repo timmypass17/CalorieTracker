@@ -29,4 +29,13 @@ interface FoodDao {
 
     @Query("SELECT SUM(fat) from foods WHERE consumed = 1")
     fun getTotalFatConsumed(): Flow<Int>
+
+    @Query("SELECT SUM(protein) from foods WHERE category = :category")
+    fun getTotalProteinFromCategory(category: String): Flow<Int>
+
+    @Query("SELECT SUM(carbs) from foods WHERE category = :category")
+    fun getTotalCarbsFromCategory(category: String): Flow<Int>
+
+    @Query("SELECT SUM(fat) from foods WHERE category = :category")
+    fun getTotalFatFromCategory(category: String): Flow<Int>
 }

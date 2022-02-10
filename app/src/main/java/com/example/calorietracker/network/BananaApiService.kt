@@ -1,5 +1,6 @@
 package com.example.calorietracker.network
 
+import com.example.calorietracker.BuildConfig
 import com.example.calorietracker.data.Food
 import com.example.calorietracker.data.FoodResponse
 import com.squareup.moshi.Moshi
@@ -21,7 +22,7 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface BananaApiService {
-    @Headers("x-app-id: f6fd3be2", "x-app-key: e341d992e158a5530d3ea321e34f23ac")
+    @Headers("x-app-id: ${BuildConfig.apiId}", "x-app-key: ${BuildConfig.apiKey}")
     @GET("search/instant")
     suspend fun getListOf(
         @Query("query") foodName: String,

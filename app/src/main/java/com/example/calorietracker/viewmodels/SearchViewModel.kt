@@ -22,6 +22,7 @@ class SearchViewModel(private val foodDao: FoodDao) : ViewModel() {
     val bananas: LiveData<List<Food>> = _bananas
 
     init {
+        getListOf("banana") // default search init
     }
 
     fun addFood(food: FoodItem) {
